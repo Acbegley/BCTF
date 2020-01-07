@@ -5,6 +5,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: welcome.php");
     exit;
 }
+?>
 
 <!DOCTYPE html>
 <html>
@@ -44,7 +45,7 @@ body {
 <body>
 
 <div class="topnav">
-  <a class="active" href="index.html">Home</a>
+  <a class="active" href="welcome.php">Home</a>
   <a href="logout.php">Logout</a>
 </div>
 
