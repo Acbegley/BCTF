@@ -5,7 +5,7 @@ $_SESSION = array();
  
 session_destroy();
  
-header("location: login.php");
+header("location: index.html");
 exit;
 ?>
 
@@ -49,13 +49,8 @@ body {
   <a class="active" href="index.html">Home</a>
   <a href="login.php">Login</a>
   <a href="logout.php">Logout</a>
-  <a href="#about">About</a>
 </div>
 
-<div style="padding-left:16px">
-  <h2>Top Navigation Example</h2>
-  <p>Some content..</p>
-</div>
 
 </body>
 </html>
