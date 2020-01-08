@@ -46,7 +46,7 @@ body {
 <body>
 
 <div class="topnav">
-  <a class="active" href="index.html">Home</a>
+  <a class="active" href="index.php">Home</a>
   <a href="login.php">Login</a>
   <a href="logout.php">Logout</a>
 </div>
