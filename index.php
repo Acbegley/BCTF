@@ -1,12 +1,11 @@
 <?php
 session_start();
  
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    header("location: welcome.php");
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,8 +44,8 @@ body {
 <body>
 
 <div class="topnav">
-  <a class="active" href="welcome.php">Home</a>
-  <a href="logout.php">Logout</a>
+  <a class="active" href="index.html">Home</a>
+  <a href="login.php">Login</a>
 </div>
 
 
