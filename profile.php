@@ -6,6 +6,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 require_once "config.php";
+$param_id = $_SESSION["id"]; 
+$sql="SELECT score FROM  users WHERE id = ?;"
+
+$result = mysql_query($sql);
+while($row = mysql_fetch_array($result)) {
+    echo $row['fieldname']; 
+}
  
 // Define variables and initialize with empty values
 $new_password = $confirm_password = "";
