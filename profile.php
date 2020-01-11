@@ -53,7 +53,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 require_once "config.php";
-$query = "SELECT score FROM users where id = ?";
+$query = "SELECT * FROM users where id = ?";
 $param_id = $_SESSION["id"];
  
  
