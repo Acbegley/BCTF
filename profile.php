@@ -53,13 +53,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 require_once "config.php";
-$sql = "SELECT score FROM users";
+$sql = "SELECT id, username, score FROM users";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "score: " . $row["score"]. "<br>";
+        echo "<br> id: ". $row["id"]. "" . $row["username"]. " " . $row["score"] . "<br>";
     }
 } else {
     echo "0 results";
