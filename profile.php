@@ -53,25 +53,17 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 require_once "config.php";
-$query = "SELECT * FROM users where id = ?";
-$param_id = $_SESSION["id"];
- 
- 
-echo '<table border="0" cellspacing="2" cellpadding="2"> 
-      <tr> 
-          <td> <font face="Arial">Score</font> </td>  
-      </tr>';
- 
-if ($result = $mysqli->query($query)) {
-    while ($row = $result->fetch_assoc()) {
-        $field1name = $row["score"];
- 
-        echo '<tr> 
-                  <td>'.$field1name.'</td>
-              </tr>';
+$sql = "SELECT score FROM users";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "score: " . $row["score"]. "<br>";
     }
-    $result->free();
-} 
+} else {
+    echo "0 results";
+}
 ?>
 </body>
 </html>
