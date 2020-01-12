@@ -54,7 +54,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 require_once "config.php";
-$sql = "SELECT score FROM users WHERE id = $_SESSION["id"]";
+$sql = "SELECT score FROM users WHERE username = '$username'";
 $result = $link->query($sql);
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
@@ -67,5 +67,6 @@ if (mysqli_num_rows($result) > 0) {
 
 mysqli_close($link);
 ?>
+<p><a href="reset.php">Reset password</a>.</p>
 </body>
 </html>
