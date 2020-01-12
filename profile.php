@@ -56,17 +56,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 require_once "config.php";
 $sql = "SELECT score FROM users WHERE id = $_SESSION["id"]";
 $result = $link->query($sql);
-if ($result->num_rows > 0) {
-	// output data of each row
-	while($row = $result->fetch_assoc()) {
-		echo "<br> score: ". $row["score"]. "<br>";
-				}
-	} else {
-		echo "0 results";
-		}
-} else{
-	echo "Oops! Something went wrong. Please try again later.";
-	}
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "score: " . $row["score"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
+
 mysqli_close($link);
 ?>
 </body>
