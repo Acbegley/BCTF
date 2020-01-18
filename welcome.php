@@ -47,6 +47,15 @@ body {
 <div class="topnav">
   <a class="active" href="welcome.php">Home</a>
   <a href="profile.php">Profile</a>
+  <?php
+  $admin = $_SESSION["admin"];
+  if ($admin = 1)
+  {
+  ?>
+  <a href="admin.php">Admin</a>
+  <?php
+  }
+  ?>
   <a href="logout.php">Logout</a>
 </div>
 
