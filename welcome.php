@@ -48,17 +48,24 @@ body {
   <a class="active" href="welcome.php">Home</a>
   <a href="profile.php">Profile</a>
   <?php
-  $admin = $_SESSION["admin"];
-  if ($admin = 1)
-  {
+  require_once "config.php";
+  $username = $_SESSION["username"];
+  $sql = "SELECT admin FROM users WHERE username = '$username'";
+  $query = mysqli_query($link, $sql);
+  while($rs = mysqli_fetch_assoc($query)){
+    $admin = $rs['admin'];
+ if ($admin == true)
+	{ 
+
+
   ?>
   <a href="admin.php">Admin</a>
   <?php
+  	}
   }
   ?>
   <a href="logout.php">Logout</a>
 </div>
-
 
 </body>
 </html>
