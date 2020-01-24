@@ -53,7 +53,7 @@ body {
   $query = mysqli_query($link, $sql);
   while($rs = mysqli_fetch_assoc($query)){
     $admin = $rs['admin'];
- if ($admin == true)
+ if ($admin == 1)
         { 
 
 
@@ -61,6 +61,10 @@ body {
   <a href="admin.php">Admin</a>
   <?php
         }
+  else
+	{
+	header("location: index.php");
+	}
   }
   ?>
   <a href="logout.php">Logout</a>
@@ -69,25 +73,48 @@ body {
 </body>
 </html>
 
-<html>
-<body>
-<?php 
-require_once "config.php";
-$username = $_SESSION["username"];
-echo "Logged in as " . $username. "<br>";
-$sql = "SELECT score FROM users WHERE username = '$username'";
-$result = $link->query($sql);
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "score: " . $row["score"]. "<br>";
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Admin Panel</title>
+    <style>
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #588c7e;
+    font-family: monospace;
+    font-size: 20px;
+    text-align: left;
     }
-} else {
-    echo "0 results";
-}
-
-mysqli_close($link);
-?>
-<p><a href="reset.php">Reset password</a>.</p>
-</body>
-</html>
+    th {
+    background-color: #588c7e;
+    color: white;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2}
+    </style>
+    </head>
+    <body>
+    <table>
+    <tr>
+    <th>Username</th>
+    <th>Score</th>
+    </tr>
+    <?php
+    require_once "config.php";
+    if ($link->connect_error) {
+    die("Connection failed: " . $link->connect_error);
+    }
+    $sql = "SELECT username, score FROM users";
+    $result = $link->query($sql);
+    if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+    echo "<tr><td>" . $row["username"]. "</td><td>" . $row["score"] . "</td></tr>";
+    }
+    echo "</table>";
+    } else { echo "0 results"; }
+    $link->close();
+    ?>
+    </table>
+    </body>
+    </html>

@@ -8,6 +8,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 ?>
 <!DOCTYPE html>
 <html>
+<title>Profile</title>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -53,7 +54,7 @@ body {
   $query = mysqli_query($link, $sql);
   while($rs = mysqli_fetch_assoc($query)){
     $admin = $rs['admin'];
- if ($admin == true)
+ if ($admin == 1)
         { 
 
 

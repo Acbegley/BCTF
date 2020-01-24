@@ -54,7 +54,7 @@ body {
   $query = mysqli_query($link, $sql);
   while($rs = mysqli_fetch_assoc($query)){
     $admin = $rs['admin'];
- if ($admin == true)
+ if ($admin == 1)
 	{ 
 
 
