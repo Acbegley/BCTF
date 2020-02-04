@@ -76,9 +76,10 @@ body {
 require_once "config.php";
 //$username = $_SESSION["username"];
 $id = $_GET["id"];
-$user = "SELECT username FROM users WHERE id = '$id'";
+$usersql = "SELECT username FROM users WHERE id = '$id'";
+$userResult = $link->query($usersql);
 echo "User: " . $user. "<br>";
-$sql = "SELECT score FROM users WHERE username = '$username'";
+$sql = "SELECT score FROM users WHERE username = '$userResult'";
 $result = $link->query($sql);
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
