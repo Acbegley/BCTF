@@ -62,10 +62,6 @@ body {
   <a href="admin.php">Admin</a>
   <?php
         }
-  else
-	{
-	header("location: index.php");
-	}
   }
   ?>
   <a href="logout.php">Logout</a>
