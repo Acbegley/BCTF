@@ -90,7 +90,7 @@ if (mysqli_num_rows($result) > 0) {
         echo "Score: " . $row["score"]. "<br>";
     }
 } else {
-    echo "0 results";
+    echo "User not found";
 }
 //echo "User: " . $user. "<br>";
 
@@ -102,7 +102,7 @@ if (mysqli_num_rows($result) > 0) {
         echo "score: " . $row["score"]. "<br>";
     }
 } else {
-    echo "User not found";
+    echo "0 results";
 }*/
 if ($id == $_SESSION["id"]) {
 echo "<p><a href='reset.php'>Reset password</a>.</p>";
