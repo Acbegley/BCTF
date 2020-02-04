@@ -75,7 +75,7 @@ body {
 <?php 
 require_once "config.php";
 $username = $_SESSION["username"];
-echo "Logged in as " . $username. "<br>";
+echo "User: " . $username. "<br>";
 $sql = "SELECT score FROM users WHERE username = '$username'";
 $result = $link->query($sql);
 if (mysqli_num_rows($result) > 0) {
