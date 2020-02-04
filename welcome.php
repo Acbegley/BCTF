@@ -65,7 +65,7 @@ body {
         }
   else
 	{
-	header("location: index.php");
+	header("location: welcome.php");
 	}
   }
   ?>
