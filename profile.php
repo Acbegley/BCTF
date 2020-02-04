@@ -74,8 +74,10 @@ body {
 <body>
 <?php 
 require_once "config.php";
-$username = $_SESSION["username"];
-echo "User: " . $username. "<br>";
+//$username = $_SESSION["username"];
+$id = $_GET["id"];
+$user = "SELECT username FROM users WHERE id = '$id'";
+echo "User: " . $user. "<br>";
 $sql = "SELECT score FROM users WHERE username = '$username'";
 $result = $link->query($sql);
 if (mysqli_num_rows($result) > 0) {
