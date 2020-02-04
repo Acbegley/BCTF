@@ -49,7 +49,7 @@ body {
   require_once "config.php";
   $username = $_SESSION["username"];
   $id = $_SESSION["id"];
-  echo "<a href="profile.php?id=$id">Profile</a>"
+  echo "<a href='profile.php?id=$id'>Profile</a>"
   $sql = "SELECT admin FROM users WHERE username = '$username'";
   $query = mysqli_query($link, $sql);
   while($rs = mysqli_fetch_assoc($query)){
