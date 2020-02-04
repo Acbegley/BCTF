@@ -109,7 +109,7 @@ body {
     if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-    echo "<tr><td>" . $row["username"]. "</td><td>" . $row["score"] . "</td></tr>";
+    echo "<tr><td><a href="profile.php">" . $row["username"]. "</td></a><td>" . $row["score"] . "</td></tr>";
     }
     echo "</table>";
     } else { echo "0 results"; }
