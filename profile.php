@@ -77,8 +77,8 @@ require_once "config.php";
 //$username = $_SESSION["username"];
 $id = $_GET["id"];
 $sql = "SELECT username, score FROM users WHERE id = '$id'";
-$result = $link->query(sql);
-if (mysqli_num_rows($userResult) > 0) {
+$result = $link->query($sql);
+if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
         echo "User: " . $row["username"]. "<br>";
