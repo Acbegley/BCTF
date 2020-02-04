@@ -104,7 +104,7 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo "0 results";
 }*/
-if ($id = $_SESSION["id"];) {
+if ($id == $_SESSION["id"]) {
 echo "<p><a href='reset.php'>Reset password</a>.</p>";
 }
 mysqli_close($link);
