@@ -104,12 +104,12 @@ body {
     if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
     }
-    $sql = "SELECT username, score FROM users";
+    $sql = "SELECT username, score, id FROM users";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-    echo "<tr><td><a href='profile.php'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td></tr>";
+    echo "<tr><td><a href='profile.php?id=. $row["id"].'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td></tr>";
     }
     echo "</table>";
     } else { echo "0 results"; }
