@@ -107,11 +107,11 @@ $username = $_SESSION["username"];
 			Set Admin: <br>
 			<input type="radio" name="admin" value="yes"> Yes<br>
 			<input type="radio" name="admin" value="no" checked> No<br>
-			<input type="submit"></h1>
+			<input type="submit" name="submit"></h1>
 			</form>
 		<?php
-		$score = $_POST["score"];
-		if (is_int($score) == 1) {
+		$score = $_REQUEST['score'];
+		if (is_int($score) == 1 && isset( $_POST['submit'] )) {
 			$sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
 			if(mysqli_query($link, $sqlScore)){
 				echo "Records were updated successfully.";
