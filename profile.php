@@ -119,9 +119,11 @@ $username = $_SESSION["username"];
 		}
 		if (isset( $_POST['setAdmin']) && $_POST['setAdmin'] == 'yes' ) {
 			$sqlAdmin = "UPDATE users SET admin=1 WHERE id='$id'";
+			mysqli_query($link, $sqlAdmin);
 		}
 		if (isset( $_POST['rmAdmin']) && $_POST['rmAdmin'] == 'no' ) {
 			$sqlAdmin = "UPDATE users SET admin=0 WHERE id='$id'";
+			mysqli_query($link, $sqlAdmin);
 		}
 	}
   }
