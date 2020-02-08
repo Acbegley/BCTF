@@ -86,8 +86,8 @@ $result = $link->query($sql);
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        echo "<h1>User: " . $row["username"].</h1> "<br>";
-        echo "<h1>Score: " . $row["score"].</h1> "<br>";
+        echo "<h1>User: " . $row["username"]. "</h1><br>";
+        echo "<h1>Score: " . $row["score"]. "</h1><br>";
     }
 } else {
     echo "User not found";
@@ -105,7 +105,7 @@ if (mysqli_num_rows($result) > 0) {
     echo "0 results";
 }*/
 if ($id == $_SESSION["id"]) {
-echo "<p><a href='reset.php'>Reset password</a>.</p>";
+echo "<h1><a href='reset.php'>Reset password</a>.</h1>";
 }
 mysqli_close($link);
 ?>
