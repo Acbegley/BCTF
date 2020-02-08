@@ -110,8 +110,8 @@ $username = $_SESSION["username"];
 			<input type="submit"></h1>
 			</form>
 		<?php
-		if (is_int($_POST["score"]) == 1) {
-			$score = $_POST["score"];
+		$score = $_POST["score"];
+		if (is_int($score) == 1) {
 			$sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
 			if(mysqli_query($link, $sqlScore)){
 				echo "Records were updated successfully.";
