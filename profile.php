@@ -103,11 +103,11 @@ $username = $_SESSION["username"];
         { 
 			?>
 			<form method="post">
-			Update Score: <input type="text" name="score"><br>
-			Set Admin: 
+			<h1>Update Score: <input type="text" name="score"><br>
+			Set Admin: <br>
 			<input type="radio" name="admin" value="yes"> Yes<br>
 			<input type="radio" name="admin" value="no" checked> No<br>
-			<input type="submit">
+			<input type="submit"></h1>
 			</form>
 		<?php	
         }
