@@ -112,15 +112,9 @@ $username = $_SESSION["username"];
 		<?php
 		if (isset( $_POST['score'] )) {
 			$score = $_POST['score'];
-			if (filter_var($score, FILTER_VALIDATE_INT) === true) {
 			$sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
-			if(mysqli_query($link, $sqlScore)){
-				echo "Records were updated successfully.";
-			} else {
-				echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-			}
+			mysqli_query($link, $sqlScore)
 		}
-        }
 	}
   }
 mysqli_close($link);
