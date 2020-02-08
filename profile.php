@@ -117,14 +117,19 @@ $username = $_SESSION["username"];
 			mysqli_query($link, $sqlScore);
 			header("Refresh:0");
 		}
-		if (isset( $_POST['setAdmin']) && $_POST['setAdmin'] == 'yes' ) {
+		if ($_POST['setAdmin'] == 'yes' && $_POST['rmAdmin'] == 'no') {
+			echo "<h1>Only select one</h1>";
+		} 
+		elseif (isset( $_POST['setAdmin']) && $_POST['setAdmin'] == 'yes' ) {
 			$sqlAdmin = "UPDATE users SET admin=1 WHERE id='$id'";
 			mysqli_query($link, $sqlAdmin);
 		}
-		if (isset( $_POST['rmAdmin']) && $_POST['rmAdmin'] == 'no' ) {
+		elseif (isset( $_POST['rmAdmin']) && $_POST['rmAdmin'] == 'no' ) {
 			$sqlAdmin = "UPDATE users SET admin=0 WHERE id='$id'";
 			mysqli_query($link, $sqlAdmin);
 		}
+		else {
+			echo "<h1>Error</h1>";
 	}
   }
 mysqli_close($link);
