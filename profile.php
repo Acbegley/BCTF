@@ -107,13 +107,17 @@ $username = $_SESSION["username"];
 			Set Admin: <br>
 			<input type="radio" name="admin" value="yes"> Yes<br>
 			<input type="radio" name="admin" value="no" checked> No<br>
-			<input type="submit">Submit</h1>
+			<input type="submit"></h1>
 			</form>
 		<?php
 		if (is_int($_POST["score"]) == 1) {
 			$score = $_POST["score"];
 			$sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
-			mysqli_query($link, $sqlScore);
+			if(mysqli_query($link, $sqlScore)){
+				echo "Records were updated successfully.";
+			} else {
+				echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+			}
 		}
         }
   }
