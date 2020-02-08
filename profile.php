@@ -102,7 +102,7 @@ $username = $_SESSION["username"];
  if ($admin == 1)
         { 
 			?>
-			<form action="profile.php" method="post">
+			<form method="post">
 			<h1>Update Score: <input type="text" name="score" value=0><br>
 			Set Admin: <br>
 			<input type="radio" name="admin" value="yes"> Yes<br>
@@ -110,8 +110,9 @@ $username = $_SESSION["username"];
 			<input type="submit" name="submit"></h1>
 			</form>
 		<?php
-		$score = $_POST['score'];
-		if (is_int($score) == 1 && isset( $_POST['submit'] )) {
+		if (isset( $_POST['score'] )) {
+			$score = $_POST['score'];
+			if (is_int($score) == 1) {
 			$sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
 			if(mysqli_query($link, $sqlScore)){
 				echo "Records were updated successfully.";
@@ -120,6 +121,7 @@ $username = $_SESSION["username"];
 			}
 		}
         }
+	}
   }
 mysqli_close($link);
 ?>
