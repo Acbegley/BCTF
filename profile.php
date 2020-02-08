@@ -113,7 +113,8 @@ $username = $_SESSION["username"];
 		if (isset( $_POST['score'] )) {
 			$score = $_POST['score'];
 			$sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
-			mysqli_query($link, $sqlScore)
+			mysqli_query($link, $sqlScore);
+			header("Refresh:0");
 		}
 	}
   }
