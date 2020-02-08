@@ -112,7 +112,7 @@ $username = $_SESSION["username"];
 		<?php
 		if (isset( $_POST['score'] )) {
 			$score = $_POST['score'];
-			if (is_int($score) == 1) {
+			if (filter_var($score, FILTER_VALIDATE_INT) === true) {
 			$sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
 			if(mysqli_query($link, $sqlScore)){
 				echo "Records were updated successfully.";
