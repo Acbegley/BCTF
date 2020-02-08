@@ -106,19 +106,21 @@ body {
     <tr>
     <th>Username</th>
     <th>Score</th>
+    <th>Admin</th>
     </tr>
     <?php
     require_once "config.php";
     if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
     }
-    $sql = "SELECT username, score, id FROM users";
+    $sql = "SELECT username, score, id, admin FROM users";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
 	$id = $row["id"];
-    echo "<tr><td><a href='profile.php?id=$id'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td></tr>";
+	$admin = $row["admin"];
+    echo "<tr><td><a href='profile.php?id=$id'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td><td>" . $row["admin"] . "</td></tr>";
     }
     echo "</table>";
     } else { echo "0 results"; }

@@ -128,8 +128,6 @@ $username = $_SESSION["username"];
 			$sqlAdmin = "UPDATE users SET admin=0 WHERE id='$id'";
 			mysqli_query($link, $sqlAdmin);
 		}
-		else {
-			echo "<h1>Error</h1>";
 	}
   }
 mysqli_close($link);
