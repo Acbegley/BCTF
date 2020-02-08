@@ -103,16 +103,19 @@ $username = $_SESSION["username"];
         { 
 			?>
 			<form method="post">
-			<h1>Update Score: <input type="text" name="score"><br>
+			<h1>Update Score: <input type="text" name="score" value=0><br>
 			Set Admin: <br>
 			<input type="radio" name="admin" value="yes"> Yes<br>
 			<input type="radio" name="admin" value="no" checked> No<br>
 			<input type="submit"></h1>
 			</form>
-		<?php	
+		<?php
+		if (is_int($_POST["score"] == 1) {
+			$score = "UPDATE ctf SET score='$_POST['score']' WHERE id='$_GET['id']'";
+			mysqli_query($link, $score);
+		}
         }
   }
-  ?>
 mysqli_close($link);
 ?>
 </body>
