@@ -79,12 +79,10 @@ h1 {
 <body>
 <?php 
 require_once "config.php";
-//$username = $_SESSION["username"];
 $id = $_GET["id"];
 $sql = "SELECT username, score FROM users WHERE id = '$id'";
 $result = $link->query($sql);
 if (mysqli_num_rows($result) > 0) {
-    // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
         echo "<h1>User: " . $row["username"]. "</h1><br>";
         echo "<h1>Score: " . $row["score"]. "</h1><br>";
@@ -92,21 +90,27 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo "User not found";
 }
-//echo "User: " . $user. "<br>";
 
-/*$sql = "SELECT score FROM users WHERE username = '$userResult'";
-$result = $link->query($sql);
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "score: " . $row["score"]. "<br>";
-    }
-} else {
-    echo "0 results";
-}*/
 if ($id == $_SESSION["id"]) {
 echo "<h1><a href='reset.php'>Reset password</a>.</h1>";
 }
+$username = $_SESSION["username"];
+ $sql = "SELECT admin FROM users WHERE username = '$username'";
+ $query = mysqli_query($link, $sql);
+ while($rs = mysqli_fetch_assoc($query)){
+    $admin = $rs['admin'];
+ if ($admin == 1)
+        { 
+			<form method="post">
+			Update Score: <input type="text" name="score"><br>
+			Set Admin: 
+			<input type="radio" name="admin" value="yes"> Yes<br>
+			<input type="radio" name="admin" value="no" checked> No<br>
+			<input type="submit">
+			</form>
+        }
+  }
+  ?>
 mysqli_close($link);
 ?>
 </body>
