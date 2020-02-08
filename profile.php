@@ -103,7 +103,7 @@ $username = $_SESSION["username"];
         { 
 			?>
 			<form method="post">
-			<h1>Update Score: <input type="text" name="score" value=0><br>
+			<h1>Update Score: <input type="text" name="score"><br>
 			<input type="checkbox" name="setAdmin" value="yes">
 			<label for="vehicle1"> Set Admin</label><br>
 			<input type="checkbox" name="rmAdmin" value="no">
@@ -116,6 +116,12 @@ $username = $_SESSION["username"];
 			$sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
 			mysqli_query($link, $sqlScore);
 			header("Refresh:0");
+		}
+		if (isset( $_POST['setAdmin']) && $_POST['setAdmin'] == 'yes' ) {
+			$sqlAdmin = "UPDATE users SET admin=1 WHERE id='$id'";
+		}
+		if (isset( $_POST['rmAdmin']) && $_POST['rmAdmin'] == 'no' ) {
+			$sqlAdmin = "UPDATE users SET admin=0 WHERE id='$id'";
 		}
 	}
   }
