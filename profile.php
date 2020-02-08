@@ -40,6 +40,10 @@ body {
   background-color: #4CAF50;
   color: white;
 }
+
+h1 {
+  text-align: center;
+}
 </style>
 </head>
 <body>
@@ -82,8 +86,8 @@ $result = $link->query($sql);
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-        echo "User: " . $row["username"]. "<br>";
-        echo "Score: " . $row["score"]. "<br>";
+        echo "<h1>User: " . $row["username"].</h1> "<br>";
+        echo "<h1>Score: " . $row["score"].</h1> "<br>";
     }
 } else {
     echo "User not found";
