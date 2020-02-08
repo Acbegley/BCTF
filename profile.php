@@ -110,9 +110,10 @@ $username = $_SESSION["username"];
 			<input type="submit"></h1>
 			</form>
 		<?php
-		if (is_int($_POST["score"] == 1) {
-			$score = "UPDATE ctf SET score='$_POST['score']' WHERE id='$_GET['id']'";
-			mysqli_query($link, $score);
+		if (is_int($_POST["score"]) == 1) {
+			$score = $_POST["score"];
+			$sqlScore = "UPDATE ctf SET score='$score' WHERE id='$id'";
+			mysqli_query($link, $sqlScore);
 		}
         }
   }
