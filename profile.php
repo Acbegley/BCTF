@@ -104,9 +104,10 @@ $username = $_SESSION["username"];
 			?>
 			<form method="post">
 			<h1>Update Score: <input type="text" name="score" value=0><br>
-			Set Admin: <br>
-			<input type="radio" name="admin" value="yes"> Yes<br>
-			<input type="radio" name="admin" value="no" checked> No<br>
+			<input type="checkbox" name="setAdmin" value="yes">
+			<label for="vehicle1"> Set Admin</label><br>
+			<input type="checkbox" name="rmAdmin" value="no">
+			<label for="vehicle2"> Remove Admin</label><br>
 			<input type="submit" name="submit"></h1>
 			</form>
 		<?php
