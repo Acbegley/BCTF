@@ -101,6 +101,7 @@ $username = $_SESSION["username"];
     $admin = $rs['admin'];
  if ($admin == 1)
         { 
+			?>
 			<form method="post">
 			Update Score: <input type="text" name="score"><br>
 			Set Admin: 
@@ -108,6 +109,7 @@ $username = $_SESSION["username"];
 			<input type="radio" name="admin" value="no" checked> No<br>
 			<input type="submit">
 			</form>
+		<?php	
         }
   }
   ?>
