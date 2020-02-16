@@ -6,7 +6,7 @@ sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
 sudo mv *  /var/www/html/
 cd .. && sudo rm -r BCTF/
 cd /var/www/html
-sudo service mysql resatrt
+sudo service mysql restart
 sudo mysql -u root -p ctf < ctf.sql
-service apache2 restart
+sudo service apache2 restart
 sudo rm ctf.sql
