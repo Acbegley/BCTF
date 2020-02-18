@@ -109,7 +109,7 @@ $username = $_SESSION["username"];
 			<label for="setAdmin"> Set Admin</label><br>
 			<input type="checkbox" name="rmAdmin" value="no">
 			<label for="rmAdmin"> Remove Admin</label><br>
-			<input type="submit" name="submit"></h1>
+			<input type="submit" name="submit"value="Submit"></h1>
 			</form>
 		<?php
 		if (isset( $_POST['score'] )) {
