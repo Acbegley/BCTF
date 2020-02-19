@@ -5,10 +5,20 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+require_once "config.php";
+  $username = $_SESSION["username"];
+  $sql = "SELECT admin FROM users WHERE username = '$username'";
+  $query = mysqli_query($link, $sql);
+  while($rs = mysqli_fetch_assoc($query)){
+    $admin = $rs['admin'];
+ if ($admin == 0)
+        { 
+        header("location: welcome.php");
+        }
+  }
 ?>
 <!DOCTYPE html>
 <html>
-<title>Profile</title>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -37,12 +47,8 @@ body {
 }
 
 .topnav a.active {
-  background-color: #4CAF50;
+  background-color: #f5740a;
   color: white;
-}
-
-h1 {
-  text-align: center;
 }
 </style>
 </head>
@@ -76,62 +82,54 @@ h1 {
 </body>
 </html>
 
-<html>
-<body>
-<?php 
-require_once "config.php";
-$id = $_GET["id"];
-$sql = "SELECT username, score FROM users WHERE id = '$id'";
-$result = $link->query($sql);
-if (mysqli_num_rows($result) > 0) {
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "<h1>User: " . $row["username"]. "</h1><br>";
-        echo "<h1>Score: " . $row["score"]. "</h1><br>";
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Admin Panel</title>
+    <style>
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #fa4616;
+    font-family: monospace;
+    font-size: 20px;
+    text-align: left;
     }
-} else {
-    echo "User not found";
-}
-
-if ($id == $_SESSION["id"]) {
-echo "<h1><a href='reset.php'>Reset password</a>.</h1>";
-}
-$username = $_SESSION["username"];
- $sql = "SELECT admin FROM users WHERE username = '$username'";
- $query = mysqli_query($link, $sql);
- while($rs = mysqli_fetch_assoc($query)){
-    $admin = $rs['admin'];
- if ($admin == 1)
-        { 
-                        ?>
-                        <form method="post">
-                        <h1>Update Score: <input type="text" name="score"><br>
-                        <input type="checkbox" name="setAdmin" value="yes">
-                        <label for="setAdmin"> Set Admin</label><br>
-                        <input type="checkbox" name="rmAdmin" value="no">
-                        <label for="rmAdmin"> Remove Admin</label><br>
-                        <input type="submit" name="submit"value="Submit"></h1>
-                        </form>
-                <?php
-                if (isset( $_POST['score'] )) {
-                        $score = $_POST['score'];
-                        $sqlScore = "UPDATE users SET score='$score' WHERE id='$id'";
-                        mysqli_query($link, $sqlScore);
-                        header("Refresh:0");
-                }
-                if ($_POST['setAdmin'] == 'yes' && $_POST['rmAdmin'] == 'no') {
-                        echo "<h1>Only select one</h1>";
-                } 
-                elseif (isset( $_POST['setAdmin']) && $_POST['setAdmin'] == 'yes' ) {
-                        $sqlAdmin = "UPDATE users SET admin=1 WHERE id='$id'";
-                        mysqli_query($link, $sqlAdmin);
-                }
-                elseif (isset( $_POST['rmAdmin']) && $_POST['rmAdmin'] == 'no' ) {
-                        $sqlAdmin = "UPDATE users SET admin=0 WHERE id='$id'";
-                        mysqli_query($link, $sqlAdmin);
-                }
-        }
-  }
-mysqli_close($link);
-?>
-</body>
-</html>
+    th {
+    background-color: #fa4616;
+    color: black;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2}
+    td>a:visited {color: #fa4616}
+    td>a:hover {color: #fc8a6a}
+    td>a:active {color: #fa4616}
+    </style>
+    </head>
+    <body>
+    <table>
+    <tr>
+    <th>Username</th>
+    <th>Score</th>
+    <th>Admin</th>
+    </tr>
+    <?php
+    require_once "config.php";
+    if ($link->connect_error) {
+    die("Connection failed: " . $link->connect_error);
+    }
+    $sql = "SELECT username, score, id, admin FROM users";
+    $result = $link->query($sql);
+    if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        $id = $row["id"];
+        $admin = $row["admin"];
+    echo "<tr><td><a href='profile.php?id=$id'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td><td>" . $row["admin"] . "</td></tr>";
+    }
+    echo "</table>";
+    } else { echo "0 results"; }
+    $link->close();
+    ?>
+    </table>
+    </body>
+    </html>
