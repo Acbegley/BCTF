@@ -71,3 +71,24 @@ body {
 
 </body>
 </html>
+
+<html>
+<body>
+<?php	
+$username = $_SESSION["username"];
+ $sql = "SELECT admin FROM users WHERE username = '$username'";
+ $query = mysqli_query($link, $sql);
+ while($rs = mysqli_fetch_assoc($query)){
+    $admin = $rs['admin'];
+ if ($admin == 1)
+        { 
+		
+		echo "Testing";
+		
+	}
+  }
+mysqli_close($link);
+?>
+	
+</body>
+</html>
