@@ -10,4 +10,3 @@ sudo service mysql restart
 sudo mysql -u root -p -e "create database ctf"
 sudo mysql -u root -p ctf < ctf.sql
 sudo service apache2 restart
-sudo rm ctf.sql
