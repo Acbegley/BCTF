@@ -143,6 +143,7 @@ $username = $_SESSION["username"];
 			Category<br><input type="text" name="category" placeholder="Cryptography"><br>
 			Description<br><input type="text" name="description" rows=10 placeholder="Description"><br>
 			Flag<br><input type="text" name="flag"placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"><br>
+			Hint<br><input type="text" name="hint"placeholder="Hint"><br>
 			Points<br><input type="text" name="points" placeholder="123"><br>
 			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
 			<input type="submit" name="submit"value="Submit"></h1>
@@ -160,7 +161,8 @@ if(isset($_POST['submit']))
 	$flag = $_POST['flag'];
 	$points = $_POST['points'];
 	$attempts = $_POST['attempts'];
-	$sql = "INSERT INTO challenge (name, category, description, flag, points, attempts ) VALUES ('$name', '$category', '$description', '$flag', '$points', '$attempts')";
+	$hint = $_POST['hint'];
+	$sql = "INSERT INTO challenge (name, category, description, flag, points, attempts, hint ) VALUES ('$name', '$category', '$description', '$flag', '$points', '$attempts', '$hint')";
 	if ($link->query($sql) === TRUE) {
     echo "";
 } else {
