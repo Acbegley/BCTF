@@ -7,6 +7,7 @@ sudo mv *  /var/www/html/
 cd .. && sudo rm -r BCTF/
 cd /var/www/html
 sudo service mysql restart
-sudo mysql -u root -p -e "create database ctf" ctf < ctf.sql
-#sudo mysql -u root -p ctf < ctf.sql
+echo "You will need to enter your MySQL password a couple of times"
+sudo mysql -u root -p -e "create database ctf"
+sudo mysql -u root -p ctf < ctf.sql
 sudo service apache2 restart
