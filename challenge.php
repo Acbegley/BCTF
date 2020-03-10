@@ -10,6 +10,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <!DOCTYPE html>
 <html>
 <head>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <style type="text/css">
+        body{ font: 14px sans-serif; }
+        .wrapper{ width: 350px; padding: 20px; }
+    </style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -124,7 +129,7 @@ $username = $_SESSION["username"];
         { 
 		?>
 		<!-- Trigger/Open The Modal -->
-<button id="myBtn">Open Modal</button>
+<button id="myBtn">Create Challenge</button>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -132,9 +137,38 @@ $username = $_SESSION["username"];
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
+    <!--<p>Challenge name</p> -->
+    <form method="post">
+			Name<br><input type="text" name="name" placeholder="Challenge name"><br>
+			Category<br><input type="text" name="category" placeholder="Cryptography"><br>
+			Description<br><input type="text" name="description" rows=10 placeholder="Description"><br>
+			Flag<br><input type="text" name="flag"placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"><br>
+			Points<br><input type="text" name="points" placeholder="123"><br>
+			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
+			<input type="submit" name="submit"value="Submit"></h1>
+			</form>
+<?php
+if(isset($_POST['submit']))
+{
+	require_once "config.php";
+    if ($link->connect_error) {
+    die("Connection failed: " . $link->connect_error);
+    }
+	$name = $_POST['name'];
+	$category = $_POST['category'];
+	$description = $_POST['description'];
+	$flag = $_POST['flag'];
+	$points = $_POST['points'];
+	$attempts = $_POST['attempts'];
+	$sql = "INSERT INTO challenge (name, category, description, flag, points, attempts ) VALUES ('$name', '$category', '$description', '$flag', '$points', '$attempts')";
+	if ($link->query($sql) === TRUE) {
+    echo "";
+} else {
+    echo "Error: " . $sql . "<br>" . $link->error;
+}
+}
+?>
   </div>
-
 </div>
 
 <script>
