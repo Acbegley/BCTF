@@ -137,11 +137,10 @@ $username = $_SESSION["username"];
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <!--<p>Challenge name</p> -->
-    <form method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			Name<br><input type="text" name="name" placeholder="Challenge name"><br>
 			Category<br><input type="text" name="category" placeholder="Cryptography"><br>
-			Description<br><input type="text" name="description" rows=10 placeholder="Description"><br>
+			Description<br><input type="textarea" name="description" rows=10 placeholder="Description"><br>
 			Flag<br><input type="text" name="flag"placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"><br>
 			Hint<br><input type="text" name="hint"placeholder="Hint"><br>
 			Points<br><input type="text" name="points" placeholder="123"><br>
