@@ -129,7 +129,10 @@ $username = $_SESSION["username"];
         { 
 		?>
 		<!-- Trigger/Open The Modal -->
-<button id="myBtn">Create Challenge</button>
+
+<div class="form-group">
+     <button id="myBtn" class="btn btn-warning">Create Challenge</button>
+</div>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -138,14 +141,15 @@ $username = $_SESSION["username"];
   <div class="modal-content">
     <span class="close">&times;</span>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			Name<br><input type="text" name="name" placeholder="Challenge name"><br>
-			Category<br><input type="text" name="category" placeholder="Cryptography"><br>
+			Name<br><textarea name="name" rows=1 cols=50 placeholder="Challenge name"></textarea><br>
+			Category<br><textarea name="category" rows=1 cols=50 placeholder="Cryptography"></textarea><br>
 			Description<br><textarea name="description" rows=4 cols=50 placeholder="Description"></textarea><br>
-			Flag<br><input type="text" name="flag"placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"><br>
+			Flag<br><textarea name="flag" rows=1 cols=50 placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"></textarea><br>
 			Hint<br><textarea name="hint" rows=4 cols=50 placeholder="Hints"></textarea><br>
+			Hint Cost<br><input type="text" name="cost" placeholder="50"><br>
 			Points<br><input type="text" name="points" placeholder="123"><br>
 			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
-			<input type="submit" name="submit"value="Submit"></h1>
+			<input type="submit" class="btn btn-warning" value="Submit"></h1>
 			</form>
 <?php
 if(isset($_POST['submit']))
