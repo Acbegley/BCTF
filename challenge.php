@@ -140,9 +140,9 @@ $username = $_SESSION["username"];
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			Name<br><input type="text" name="name" placeholder="Challenge name"><br>
 			Category<br><input type="text" name="category" placeholder="Cryptography"><br>
-			Description<br><input type="textarea" name="description" rows=10 placeholder="Description"><br>
+			Description<br><textarea name="description" rows=4 cols=50 placeholder="Description"></textarea><br>
 			Flag<br><input type="text" name="flag"placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"><br>
-			Hint<br><input type="text" name="hint"placeholder="Hint"><br>
+			Hint<br><textarea name="hint" rows=4 cols=50 placeholder="Hints"></textarea><br>
 			Points<br><input type="text" name="points" placeholder="123"><br>
 			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
 			<input type="submit" name="submit"value="Submit"></h1>
