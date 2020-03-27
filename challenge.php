@@ -149,11 +149,10 @@ $username = $_SESSION["username"];
 			Hint Cost<br><input type="text" name="cost" placeholder="50"><br>
 			Points<br><input type="text" name="points" placeholder="123"><br>
 			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
-			<input type="submit" class="btn btn-warning" value="Submit"></h1>
+			<input type="submit"  class="btn btn-warning" value="Submit" name="submit_button"></h1>
 			</form>
 <?php
-if(isset($_POST['submit']))
-{
+if(isset($_POST['submit_button'])) {
 	require_once "config.php";
     if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
