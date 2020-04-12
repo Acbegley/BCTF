@@ -116,9 +116,10 @@ body {
     <body>
     <table>
     <tr>
+	<th>ID</th>
     <th>Username</th>
     <th>Score</th>
-    <th>Admin</th>
+    <th>Group</th>
     </tr>
     <?php
     require_once "config.php";
@@ -132,7 +133,14 @@ body {
     while($row = $result->fetch_assoc()) {
         $id = $row["id"];
         $admin = $row["admin"];
-    echo "<tr><td><a href='profile.php?id=$id'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td><td>" . $row["admin"] . "</td></tr>";
+		$group = "";
+		if ($row["admin"] == 1) {
+			$group = "admin";
+		}
+		else {
+			$group = "user";
+		}
+    echo "<tr><td>" . $row["id"] . "</td><td><a href='profile.php?id=$id'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td><td>" . $group . "</td></tr>";
     }
     echo "</table>";
     } else { echo "0 results"; }
