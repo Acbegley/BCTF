@@ -11,6 +11,10 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <title>Profile</title>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <style>
 body {
   margin: 0;
@@ -78,6 +82,7 @@ h1 {
 
 <html>
 <body>
+<center>
 <?php 
 require_once "config.php";
 $id = $_GET["id"];
@@ -85,15 +90,15 @@ $sql = "SELECT username, score FROM users WHERE id = '$id'";
 $result = $link->query($sql);
 if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)) {
-        echo "<h1>User: " . $row["username"]. "</h1><br>";
-        echo "<h1>Score: " . $row["score"]. "</h1><br>";
+        echo "User: " . $row["username"]. "<br>";
+        echo "Score: " . $row["score"]. "<br>";
     }
 } else {
     echo "User not found";
 }
 
 if ($id == $_SESSION["id"]) {
-echo "<h1><a href='reset.php'>Reset password</a>.</h1>";
+echo "<a href='reset.php'>Reset password</a>.";
 }
 $username = $_SESSION["username"];
  $sql = "SELECT admin FROM users WHERE username = '$username'";
@@ -104,13 +109,14 @@ $username = $_SESSION["username"];
         { 
 			?>
 			<form method="post">
-			<h1>Update Score: <input type="text" name="score"><br>
+			Update Score: <input type="text" name="score"><br>
 			<input type="checkbox" name="setAdmin" value="yes">
 			<label for="setAdmin"> Set Admin</label><br>
 			<input type="checkbox" name="rmAdmin" value="no">
 			<label for="rmAdmin"> Remove Admin</label><br>
-			<input type="submit" name="submit"value="Submit"></h1>
+			<input type="submit" name="submit"value="Submit">
 			</form>
+			</center>
 		<?php
 		if (isset( $_POST['score'] )) {
 			$score = $_POST['score'];
