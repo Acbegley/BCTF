@@ -134,26 +134,29 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <?php
 $sqlChallenge = "SELECT DISTINCT category FROM challenge ORDER BY category;";
 $result = $link->query($sqlChallenge);
+$i = 0;
     if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $category = $row["category"];
 ?>
   <div class="card">
-    <div class="card-header" id="heading<?php echo "$category";?>">
+    <div class="card-header" id="heading<?php echo "$i";?>">
       <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo "$category";?>" aria-expanded="false" aria-controls="collapse<?php echo "$category";?>">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse<?php echo "$i";?>" aria-expanded="false" aria-controls="collapse<?php echo "$i";?>">
           <?php echo "$category";?>
         </button>
       </h2>
     </div>
 
-    <div id="collapse<?php echo "$category";?>" class="collapse" aria-labelledby="heading<?php echo "$category";?>" data-parent="#challenges">
+    <div id="collapse<?php echo "$i";?>" class="collapse" aria-labelledby="heading<?php echo "$i";?>" data-parent="#challenges">
       <div class="card-body">
         Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
       </div>
     </div>
   </div>
-	<?php } }?>
+	<?php
+			$i += 1;
+	} }?>
 </center>
 <?php	
 $username = $_SESSION["username"];
@@ -177,7 +180,7 @@ $username = $_SESSION["username"];
     <span class="close">&times;</span>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			Name<br><textarea name="name" rows=1 cols=50 placeholder="Challenge name"></textarea><br>
-			Category<br><textarea name="category" rows=1 cols=50 placeholder="Cryptography (No spaces here)"></textarea><br>
+			Category<br><textarea name="category" rows=1 cols=50 placeholder="Cryptography"></textarea><br>
 			Description<br><textarea name="description" rows=4 cols=50 placeholder="Description"></textarea><br>
 			Flag<br><textarea name="flag" rows=1 cols=50 placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"></textarea><br>
 			Hint<br><textarea name="hint" rows=4 cols=50 placeholder="Hints"></textarea><br>
