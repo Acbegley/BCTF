@@ -57,43 +57,58 @@ body {
 }
 body {font-family: Arial, Helvetica, sans-serif;}
 
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
+.modal-window {
+  position: fixed;
+  background-color: rgba(200, 200, 200, 0.75);
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+.modal-window:target {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
+.modal-window>div {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 2rem;
+  background: #fff;
+  color: #444;
+}
+
+.modal-window header {
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
   text-decoration: none;
-  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
 }
 </style>
 </head>
@@ -150,7 +165,23 @@ $i = 0;
 
     <div id="collapse<?php echo "$i";?>" class="collapse" aria-labelledby="heading<?php echo "$i";?>" data-parent="#challenges">
       <div class="card-body">
-        [Placeholder]
+		<?php
+			$chalEnum = "SELECT name FROM challenge WHERE category = '$category' ORDER BY id;";
+			$enumResult = $link->query($chalEnum);
+			while($enumRow = $enumResult->fetch_assoc()) {
+				$name = $enumRow["name"];
+				?>
+<a href="#open-<?php echo "$name"; ?>"><?php echo "$name"; ?></a>
+<div id="open-<?php echo "$name"; ?>" class="modal-window">
+  <div>
+    <a href="#<?php echo "$name"; ?>-close" title="Close" class="modal-close">close &times;</a>
+    <h1><?php echo "$name"; ?></h1>
+    <div>Placeholder</div>
+  </div>
+</div><br>
+		<?php
+			}
+		?>
       </div>
     </div>
   </div>
@@ -167,79 +198,9 @@ $username = $_SESSION["username"];
  if ($admin == 1)
         { 
 		?>
-		<!-- Trigger/Open The Modal -->
 
-<div class="form-group">
-     <button id="myBtn" class="btn btn-warning">Create Challenge</button>
-</div>
-<!-- The Modal -->
-<div id="myModal" class="modal">
+	 <a href="create.php" class="btn btn-warning">Create Challenge</a>
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			Name<br><textarea name="name" rows=1 cols=50 placeholder="Challenge name"></textarea><br>
-			Category<br><textarea name="category" rows=1 cols=50 placeholder="Cryptography"></textarea><br>
-			Description<br><textarea name="description" rows=4 cols=50 placeholder="Description"></textarea><br>
-			Flag<br><textarea name="flag" rows=1 cols=50 placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"></textarea><br>
-			Hint<br><textarea name="hint" rows=4 cols=50 placeholder="Hints"></textarea><br>
-			Hint Cost<br><input type="text" name="cost" placeholder="50"><br>
-			Points<br><input type="text" name="points" placeholder="123"><br>
-			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
-			<input type="submit"  class="btn btn-warning" value="Submit" name="submit_button"></h1>
-			</form>
-<?php
-if(isset($_POST['submit_button'])) {
-	require_once "config.php";
-    if ($link->connect_error) {
-    die("Connection failed: " . $link->connect_error);
-    }
-	$name = $_POST['name'];
-	$category = $_POST['category'];
-	$description = $_POST['description'];
-	$flag = $_POST['flag'];
-	$points = $_POST['points'];
-	$attempts = $_POST['attempts'];
-	$hint = $_POST['hint'];
-	$sql = "INSERT INTO challenge (name, category, description, flag, points, attempts, hint ) VALUES ('$name', '$category', '$description', '$flag', '$points', '$attempts', '$hint')";
-	if ($link->query($sql) === TRUE) {
-    echo "";
-} else {
-    echo "Error: " . $sql . "<br>" . $link->error;
-}
-}
-?>
-  </div>
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
 		<?php
 	}
   }
