@@ -166,17 +166,26 @@ $i = 0;
     <div id="collapse<?php echo "$i";?>" class="collapse" aria-labelledby="heading<?php echo "$i";?>" data-parent="#challenges">
       <div class="card-body">
 		<?php
-			$chalEnum = "SELECT name FROM challenge WHERE category = '$category' ORDER BY id;";
+			$chalEnum = "SELECT * FROM challenge WHERE category = '$category' ORDER BY id;";
 			$enumResult = $link->query($chalEnum);
 			while($enumRow = $enumResult->fetch_assoc()) {
 				$name = $enumRow["name"];
+				$id = $enumRow["id"];
+				$points = $enumRow["points"];
+				$attempts = $enumRow["attempts"];
+				$hint = $enumRow["hint"];
+				$description = $enumRow["description"];
+				$flag = $enumRow["flag"];
+				$hintCost = $enumRow["hintCost"];
 				?>
 <a href="#open-<?php echo "$name"; ?>"><?php echo "$name"; ?></a>
 <div id="open-<?php echo "$name"; ?>" class="modal-window">
   <div>
     <a href="#<?php echo "$name"; ?>-close" title="Close" class="modal-close">close &times;</a>
     <h1><?php echo "$name"; ?></h1>
-    <div>Placeholder</div>
+    <div>
+		<?php echo "$description"; ?>
+	</div>
   </div>
 </div><br>
 		<?php
