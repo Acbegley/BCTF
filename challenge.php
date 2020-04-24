@@ -185,6 +185,10 @@ $i = 0;
     <h1><?php echo "$name"; ?></h1>
     <div>
 		<?php echo "$description"; ?>
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+		<br>Flag:<textarea name="flagInput" rows=1 cols=40></textarea><br>
+		<p align=right><input type="submit"  class="btn btn-warning" value="Submit" name="submit_button"></p>
+		</form>
 	</div>
   </div>
 </div><br>
