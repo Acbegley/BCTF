@@ -166,6 +166,15 @@ $i = 0;
     <div id="collapse<?php echo "$i";?>" class="collapse" aria-labelledby="heading<?php echo "$i";?>" data-parent="#challenges">
       <div class="card-body">
 		<?php
+			/*$username = $_SESSION["username"];
+			$completion = mysql_query("SELECT * FROM completion, challenge, users WHERE users.username = '$username' AND completion.challengeName = challenge.name LIMIT 1");
+			if(mysql_fetch_array($completion) == false) {
+				// create record
+			}
+			else {
+				// do nothing
+			}
+			*/
 			$chalEnum = "SELECT * FROM challenge WHERE category = '$category' ORDER BY id;";
 			$enumResult = $link->query($chalEnum);
 			while($enumRow = $enumResult->fetch_assoc()) {
@@ -177,7 +186,7 @@ $i = 0;
 				$description = $enumRow["description"];
 				$flag = $enumRow["flag"];
 				$hintCost = $enumRow["hintCost"];
-				?>
+				?>	
 <a href="#open-<?php echo "$name"; ?>"><?php echo "$name"; ?></a>
 <div id="open-<?php echo "$name"; ?>" class="modal-window">
   <div>
@@ -185,9 +194,11 @@ $i = 0;
     <h1><?php echo "$name"; ?></h1>
     <div>
 		<?php echo "$description"; ?>
+
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 		<br>Flag:<textarea name="flagInput" rows=1 cols=40></textarea><br>
-		<p align=right><input type="submit"  class="btn btn-warning" value="Submit" name="submit_button"></p>
+		Attempts Used: ?/<?php echo "$attempts"; ?>
+		<p align=right><input type="submit"  class="btn btn-warning" value="Submit" name="chalSubmit"></p>
 		</form>
 	</div>
   </div>
