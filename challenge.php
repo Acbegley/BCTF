@@ -143,6 +143,28 @@ body {font-family: Arial, Helvetica, sans-serif;}
 </html>
 
 <html>
+<?php
+	$createRecords = "SELECT name FROM challenge;";
+	$recordResult = $link->query($createRecords);
+	while($enumRecord = $recordResult->fetch_assoc()) {
+		$username = $_SESSION["username"];
+		$currentChallenge = $enumRecord["name"];
+		$findRecord = "SELECT TRUE FROM completion WHERE username = '$username' AND challengeName = '$currentChallenge';";
+		$records = mysqli_query($link, $findRecord);
+			if (mysqli_num_rows($records) > 0) {
+				echo '';
+				} 
+			else {
+				$newRecord = "INSERT INTO completion (username, challengeName, attemptsUsed, hintUsed, complete) VALUES ('$username', '$currentChallenge', 0, 0, 0);";
+				if ($link->query($newRecord) === TRUE) {
+					echo "";
+				} 
+				else {
+					echo "Error: " . $newRecord . "<br>" . $link->error;
+				}
+			}
+	}
+?>
 <body>
 <center>
 <div class="accordion" id="challenges">
@@ -166,7 +188,7 @@ $i = 0;
     <div id="collapse<?php echo "$i";?>" class="collapse" aria-labelledby="heading<?php echo "$i";?>" data-parent="#challenges">
       <div class="card-body">
 		<?php
-			/*$username = $_SESSION["username"];
+			/*$username = $_SESSION["username"]; 
 			$completion = mysql_query("SELECT * FROM completion, challenge, users WHERE users.username = '$username' AND completion.challengeName = challenge.name LIMIT 1");
 			if(mysql_fetch_array($completion) == false) {
 				// create record
