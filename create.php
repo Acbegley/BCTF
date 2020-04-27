@@ -101,7 +101,7 @@ p {
 			Description<br><textarea name="description" rows=4 cols=50 placeholder="Description"></textarea><br>
 			Flag<br><textarea name="flag" rows=1 cols=50 placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"></textarea><br>
 			Hint<br><textarea name="hint" rows=4 cols=50 placeholder="Hints"></textarea><br>
-			Hint Cost<br><input type="text" name="hintCost" placeholder="50"><br>
+			Hint Cost<br><input type="text" name="hintCost" value="0"><br>
 			Points<br><input type="text" name="points" placeholder="123"><br>
 			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
 			<input type="submit"  class="btn btn-warning" value="Submit" name="submit_button"></p>

@@ -169,7 +169,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <center>
 <div class="accordion" id="challenges">
 <?php
-$sqlChallenge = "SELECT DISTINCT category FROM challenge ORDER BY category;";
+$sqlChallenge = "SELECT DISTINCT category FROM challenge;";
 $result = $link->query($sqlChallenge);
 $i = 0;
     if ($result->num_rows > 0) {
