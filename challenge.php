@@ -188,15 +188,6 @@ $i = 0;
     <div id="collapse<?php echo "$i";?>" class="collapse" aria-labelledby="heading<?php echo "$i";?>" data-parent="#challenges">
       <div class="card-body">
 		<?php
-			/*$username = $_SESSION["username"]; 
-			$completion = mysql_query("SELECT * FROM completion, challenge, users WHERE users.username = '$username' AND completion.challengeName = challenge.name LIMIT 1");
-			if(mysql_fetch_array($completion) == false) {
-				// create record
-			}
-			else {
-				// do nothing
-			}
-			*/
 			$chalEnum = "SELECT * FROM challenge WHERE category = '$category' ORDER BY id;";
 			$enumResult = $link->query($chalEnum);
 			while($enumRow = $enumResult->fetch_assoc()) {
@@ -219,8 +210,36 @@ $i = 0;
 
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 		<br>Flag:<textarea name="flagInput" rows=1 cols=40></textarea><br>
-		Attempts Used: ?/<?php echo "$attempts"; ?>
-		<p align=right><input type="submit"  class="btn btn-warning" value="Submit" name="chalSubmit"></p>
+		<?php
+		$username = $_SESSION["username"]; 
+		$completionEnum = "SELECT * FROM completion WHERE username = '$username' AND challengeName = '$name';";
+		$completionResult = $link->query($completionEnum);
+		while($completionRow = $completionResult->fetch_assoc()) {
+			$attemptsUsed = $completionRow["attemptsUsed"];
+			$complete = $completionRow["complete"];
+			$hintUsed = $completionRow["hintUsed"];
+			$id = $completionRow["id"];
+		?>
+		Attempts Used: <?php echo "$attemptsUsed"; ?>/<?php echo "$attempts"; ?>
+		<?php
+		if ($attemptsUsed >= $attempts) { 
+			echo "<br>You have used all of your attempts. <br>";
+		} elseif ($complete == 1) {
+			echo "<br>You have completed this challenge. <br>";
+		}
+		else { 
+		$chalSubmit = "submit" . "$id";
+		?>
+			<p align=right><input type="submit"  class="btn btn-warning" value="Submit" name="<?php echo "$chalSubmit"; ?>"></p>
+			<?php
+		}
+		if(isset($_POST[$chalSubmit])) {
+			$newAttempt = $attemptsUsed + 1;
+			$sql = "UPDATE completion SET attemptsUsed = '$newAttempt' WHERE id = '$id';";
+			mysqli_query($link, $sql);
+			echo "<meta http-equiv='refresh' content='0'>";
+		}		
+	} ?>
 		</form>
 	</div>
   </div>

@@ -114,7 +114,7 @@ $username = $_SESSION["username"];
 			<label for="setAdmin"> Set Admin</label><br>
 			<input type="checkbox" name="rmAdmin" value="no">
 			<label for="rmAdmin"> Remove Admin</label><br>
-			<input type="submit" name="submit"value="Submit">
+			<input type="submit" class="btn btn-warning" name="submit"value="Submit">
 			</form>
 			</center>
 		<?php
