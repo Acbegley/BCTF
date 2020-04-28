@@ -237,6 +237,11 @@ $i = 0;
 			$newAttempt = $attemptsUsed + 1;
 			$sql = "UPDATE completion SET attemptsUsed = '$newAttempt' WHERE id = '$id';";
 			mysqli_query($link, $sql);
+			$flagInput = $_POST['flagInput'];
+			if ($flagInput == $flag) {
+				$completeCheck = "UPDATE completion SET complete = 1 WHERE id = '$id';";
+				mysqli_query($link, $completeCheck);
+			}
 			echo "<meta http-equiv='refresh' content='0'>";
 		}		
 	} ?>
