@@ -206,7 +206,8 @@ $i = 0;
     <a href="#<?php echo "$name"; ?>-close" title="Close" class="modal-close">close &times;</a>
     <h1><?php echo "$name"; ?></h1>
     <div>
-		<?php echo "$description"; ?>
+		<?php echo "<br>Points: $points <br>"; ?>
+		<?php echo "<br>$description<br>"; ?>
 
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 		<br>Flag:<textarea name="flagInput" rows=1 cols=40></textarea><br>
@@ -220,17 +221,42 @@ $i = 0;
 			$hintUsed = $completionRow["hintUsed"];
 			$id = $completionRow["id"];
 		?>
-		Attempts Used: <?php echo "$attemptsUsed"; ?>/<?php echo "$attempts"; ?>
+		Attempts Used: <?php echo "$attemptsUsed"; ?>/<?php echo "$attempts"; ?><br>
 		<?php
-		if ($attemptsUsed >= $attempts) { 
-			echo "<br>You have used all of your attempts. <br>";
-		} elseif ($complete == 1) {
-			echo "<br>You have completed this challenge. <br>";
+		if ($hintUsed ==1) {
+			echo "Hint: $hint <br>";
+		}
+		elseif ($hint == "" OR $complete == 1) {
+			echo "";
+		}
+		else {
+			$chalHint = "hint" . "$id";
+			?>
+			<input type="submit"  class="btn btn-warning" value="Hint" name="<?php echo "$chalHint"; ?>">
+			<?php
+			if(isset($_POST[$chalHint])) {
+				$setHint = "UPDATE completion SET hintUsed = 1 WHERE id = '$id';";
+				$getPoints = "SELECT score FROM users WHERE username = '$username';";
+				$pointResult = $link->query($getPoints);
+				while($pointRow = $pointResult->fetch_assoc()) {
+					$score = $pointRow["score"];
+					$newScore = $score - $hintCost;
+					$updateScore = "UPDATE users SET score = '$newScore' WHERE username = '$username';";
+					mysqli_query($link, $updateScore);
+				}
+				mysqli_query($link, $setHint);
+				echo "<meta http-equiv='refresh' content='0'>";
+			}
+		}
+		if ($complete == 1) { 
+			echo "You have completed this challenge. <br>";
+		} elseif ($attemptsUsed >= $attempts) {
+			echo "You have used all of your attempts. <br>";
 		}
 		else { 
 		$chalSubmit = "submit" . "$id";
 		?>
-			<p align=right><input type="submit"  class="btn btn-warning" value="Submit" name="<?php echo "$chalSubmit"; ?>"></p>
+			<input type="submit"  class="btn btn-warning" value="Submit" name="<?php echo "$chalSubmit"; ?>">
 			<?php
 		}
 		if(isset($_POST[$chalSubmit])) {
@@ -239,6 +265,14 @@ $i = 0;
 			mysqli_query($link, $sql);
 			$flagInput = $_POST['flagInput'];
 			if ($flagInput == $flag) {
+				$getPoints = "SELECT score FROM users WHERE username = '$username';";
+				$pointResult = $link->query($getPoints);
+				while($pointRow = $pointResult->fetch_assoc()) {
+					$score = $pointRow["score"];
+					$newScore = $points + $score;
+					$updateScore = "UPDATE users SET score = '$newScore' WHERE username = '$username';";
+					mysqli_query($link, $updateScore);
+				}
 				$completeCheck = "UPDATE completion SET complete = 1 WHERE id = '$id';";
 				mysqli_query($link, $completeCheck);
 			}
