@@ -116,11 +116,12 @@ body {
     if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
     }
-    $sql = "SELECT username, score FROM users ORDER BY score DESC";
+    $sql = "SELECT username, score, id FROM users ORDER BY score DESC";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
 		$i = 1;
 		while($row = $result->fetch_assoc()) {
+			$id = $row["id"];
 			if ($row["username"] !== "admin") {
 			echo "<tr><td>". $i ."</td><td><a href='profile.php?id=$id'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td></tr>";
 			$i += 1;

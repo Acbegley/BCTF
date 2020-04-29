@@ -81,6 +81,7 @@ h1 {
 </body>
 </html>
 
+<!DOCTYPE html>
 <html>
 <body>
 <center>
@@ -98,7 +99,7 @@ if (mysqli_num_rows($result) > 0) {
     echo "User not found";
 }
 
-if ($id == $_SESSION["id"]) {
+if ($id == $_SESSION["id"] AND $_SESSION["id"] == 1) {
 echo "<a href='reset.php'>Reset password</a>.";
 }
 $username = $_SESSION["username"];

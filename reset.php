@@ -4,6 +4,17 @@ session_start();
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
+  require_once "config.php";
+  $username = $_SESSION["username"];
+  $sql = "SELECT admin FROM users WHERE username = '$username'";
+  $query = mysqli_query($link, $sql);
+  while($rs = mysqli_fetch_assoc($query)){
+    $admin = $rs['admin'];
+ if ($admin == 0)
+        { 
+        header("location: welcome.php");
+        }
+  }
 }
 require_once "config.php";
  
