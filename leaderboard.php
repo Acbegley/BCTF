@@ -82,6 +82,7 @@ body {
 
     <!DOCTYPE html>
     <html>
+	<title>Leaderboard</title>
     <head>
     <title>Admin Panel</title>
     <style>

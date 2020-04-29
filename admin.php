@@ -130,7 +130,6 @@ body {
     $sql = "SELECT username, score, id, admin FROM users";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
-    // output data of each row
     while($row = $result->fetch_assoc()) {
         $id = $row["id"];
         $admin = $row["admin"];

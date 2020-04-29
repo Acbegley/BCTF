@@ -67,6 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 ?>
 <!DOCTYPE html>
 <html>
+<title>Reset Password</title>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
