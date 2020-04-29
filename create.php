@@ -126,7 +126,7 @@ if(isset($_POST['submit_button'])) {
 	if ($link->query($sql) === TRUE) {
     echo "";
 } else {
-    echo "Error: " . $sql . "<br>" . $link->error;
+    echo "Error: Please fill all fields, other than the hint field if you do not want one.";
 }
 }
 mysqli_close($link);

@@ -233,6 +233,7 @@ $i = 0;
 		}
 		else {
 			$chalHint = "hint" . "$id";
+			echo "Hint Cost: $hintCost <br>";
 			?>
 			<input type="submit"  class="btn btn-warning" value="Hint" name="<?php echo "$chalHint"; ?>">
 			<?php

@@ -102,7 +102,7 @@ if (mysqli_num_rows($result) > 0) {
 if ($id == $_SESSION["id"] AND $_SESSION["id"] == 1) {
 echo "<a href='reset.php'>Reset password</a>.";
 }
-$username = $_SESSION["username"];
+ $username = $_SESSION["username"];
  $sql = "SELECT admin FROM users WHERE username = '$username'";
  $query = mysqli_query($link, $sql);
  while($rs = mysqli_fetch_assoc($query)){
