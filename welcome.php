@@ -77,3 +77,12 @@ body {
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+<title>Welcome</title>
+<center>
+<img src="https://www.indianatech.edu/wp-content/uploads/warrior.white_.outline.png" alt="Warrior Logo">
+<h1>Welcome to BCTF</h1>
+</center>
+</html>

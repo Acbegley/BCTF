@@ -84,7 +84,6 @@ body {
     <html>
 	<title>Leaderboard</title>
     <head>
-    <title>Admin Panel</title>
     <style>
     table {
     border-collapse: collapse;

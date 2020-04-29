@@ -56,3 +56,9 @@ body {
 
 </body>
 </html>
+
+<html>
+<center>
+<img src="https://www.indianatech.edu/wp-content/uploads/warrior.white_.outline.png" alt="Warrior Logo">
+</center>
+</html>
