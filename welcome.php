@@ -52,6 +52,7 @@ body {
 <div class="topnav">
   <a class="active" href="welcome.php">Home</a>
   <a href='challenge.php'>Challenges</a>
+  <a href='leaderboard.php'>Leaderboard</a>
   <?php
   require_once "config.php";
   $username = $_SESSION["username"];

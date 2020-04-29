@@ -117,6 +117,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div class="topnav">
   <a class="active" href="welcome.php">Home</a>
   <a href='challenge.php'>Challenges</a>
+  <a href='leaderboard.php'>Leaderboard</a>
   <?php
   require_once "config.php";
   $username = $_SESSION["username"];
@@ -226,7 +227,7 @@ $i = 0;
 		if ($hintUsed ==1) {
 			echo "Hint: $hint <br>";
 		}
-		elseif ($hint == "" OR $complete == 1) {
+		elseif ($hint == "" OR $complete == 1 OR $attemptsUsed >= $attempts) {
 			echo "";
 		}
 		else {

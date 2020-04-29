@@ -5,17 +5,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-require_once "config.php";
-  $username = $_SESSION["username"];
-  $sql = "SELECT admin FROM users WHERE username = '$username'";
-  $query = mysqli_query($link, $sql);
-  while($rs = mysqli_fetch_assoc($query)){
-    $admin = $rs['admin'];
- if ($admin == 0)
-        { 
-        header("location: welcome.php");
-        }
-  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -58,9 +47,6 @@ body {
   background-color: #f5740a;
   color: white;
 }
-p {
-  margin: 35px;
-}
 </style>
 </head>
 <body>
@@ -94,40 +80,55 @@ p {
 </body>
 </html>
 
-<!DOCTYPE html>
-<html>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			<p class="1">Name<br><textarea name="name" rows=1 cols=50 placeholder="Challenge name"></textarea><br>
-			Category<br><textarea name="category" rows=1 cols=50 placeholder="Cryptography"></textarea><br>
-			Description<br><textarea name="description" rows=4 cols=50 placeholder="Description"></textarea><br>
-			Flag<br><textarea name="flag" rows=1 cols=50 placeholder="flag{VpGUEszSoOPLg8alGWnnzAnrbj60gcAC}"></textarea><br>
-			Hint<br><textarea name="hint" rows=4 cols=50 placeholder="Hints (Leave blank if you do not want to give a hint)"></textarea><br>
-			Hint Cost<br><input type="text" name="hintCost" value="0"><br>
-			Points<br><input type="text" name="points" placeholder="123"><br>
-			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
-			<input type="submit"  class="btn btn-warning" value="Submit" name="submit_button"></p>
-			</form>
-<?php
-if(isset($_POST['submit_button'])) {
-	require_once "config.php";
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Admin Panel</title>
+    <style>
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #fa4616;
+    font-family: monospace;
+    font-size: 20px;
+    text-align: left;
+    }
+    th {
+    background-color: #fa4616;
+    color: black;
+    }
+    tr:nth-child(even) {background-color: #f2f2f2}
+    td>a:visited {color: #fa4616}
+    td>a:hover {color: #fc8a6a}
+    td>a:active {color: #fa4616}
+    </style>
+    </head>
+    <body>
+    <table>
+    <tr>
+	<th>Place</th>
+    <th>Username</th>
+    <th>Score</th>
+    </tr>
+    <?php
+    require_once "config.php";
     if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
     }
-	$name = $_POST['name'];
-	$category = $_POST['category'];
-	$description = $_POST['description'];
-	$flag = $_POST['flag'];
-	$points = $_POST['points'];
-	$attempts = $_POST['attempts'];
-	$hint = $_POST['hint'];
-	$hintCost = $_POST['hintCost'];
-	$sql = "INSERT INTO challenge (name, category, description, flag, points, attempts, hint, hintCost ) VALUES ('$name', '$category', '$description', '$flag', '$points', '$attempts', '$hint', '$hintCost')";
-	if ($link->query($sql) === TRUE) {
-    echo "";
-} else {
-    echo "Error: " . $sql . "<br>" . $link->error;
-}
-}
-mysqli_close($link);
-?>
-</html>
+    $sql = "SELECT username, score FROM users ORDER BY score DESC";
+    $result = $link->query($sql);
+    if ($result->num_rows > 0) {
+		$i = 1;
+		while($row = $result->fetch_assoc()) {
+			if ($row["username"] !== "admin") {
+			echo "<tr><td>". $i ."</td><td><a href='profile.php?id=$id'>" . $row["username"]. "</a></td><td>" . $row["score"] . "</td></tr>";
+			$i += 1;
+			}
+		}
+    echo "</table>";
+    } else { echo "0 results"; }
+    $link->close();
+    ?>
+    </table>
+    </body>
+    </html>
