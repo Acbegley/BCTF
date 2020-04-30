@@ -136,7 +136,7 @@ body {
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="submit" class="btn btn-warning" value="Login">
             </div>
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>

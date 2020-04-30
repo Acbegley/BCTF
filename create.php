@@ -106,7 +106,7 @@ p {
 			Hint Cost<br><input type="text" name="hintCost" value="0"><br>
 			Points<br><input type="text" name="points" placeholder="123"><br>
 			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
-			<input type="submit"  class="btn btn-warning" value="Submit" name="submit_button"></p>
+			<input type="submit"  class="btn btn-warning" value="Create" name="submit_button"></p>
 			</form>
 <?php
 if(isset($_POST['submit_button'])) {
