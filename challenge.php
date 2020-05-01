@@ -201,6 +201,7 @@ $i = 0;
 				$description = $enumRow["description"];
 				$flag = $enumRow["flag"];
 				$hintCost = $enumRow["hintCost"];
+				$file = $enumRow["file"];
 				?>	
 <a href="#open-<?php echo "$name"; ?>"><?php echo "$name"; ?></a>
 <div id="open-<?php echo "$name"; ?>" class="modal-window">
@@ -210,6 +211,12 @@ $i = 0;
     <div>
 		<?php echo "<br>Points: $points <br>"; ?>
 		<?php echo "<br>$description<br>"; ?>
+		<?php
+		$fileName = str_replace("uploads/","","$file");
+		if ($file !== NULL) {
+			 echo "<a href='$file' download>$fileName</a>"; 
+		}
+		?>
 
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 		<br>Flag:<textarea name="flagInput" rows=1 cols=40></textarea><br>

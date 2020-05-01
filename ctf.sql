@@ -32,6 +32,7 @@ CREATE TABLE `challenge` (
   `description` text NOT NULL,
   `category` varchar(255) NOT NULL,
   `flag` varchar(255) NOT NULL,
+  `file` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -110,4 +111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-26 16:46:14
+-- Dump completed on 2020-05-01 17:26:11

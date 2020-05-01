@@ -97,7 +97,7 @@ p {
 
 <!DOCTYPE html>
 <html>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
 			<p class="1">Name<br><textarea name="name" rows=1 cols=50 placeholder="Challenge name"></textarea><br>
 			Category<br><textarea name="category" rows=1 cols=50 placeholder="Cryptography"></textarea><br>
 			Description<br><textarea name="description" rows=4 cols=50 placeholder="Description"></textarea><br>
@@ -106,14 +106,48 @@ p {
 			Hint Cost<br><input type="text" name="hintCost" value="0"><br>
 			Points<br><input type="text" name="points" placeholder="123"><br>
 			Attempts<br><input type="text" name="attempts" placeholder="3"><br>
+			File upload (Leave empty if no files are required)<br><input type="file" name="uploadedFile" /><br>
 			<input type="submit"  class="btn btn-warning" value="Create" name="submit_button"></p>
 			</form>
 <?php
+	$currentDirectory = getcwd();
+    $uploadDirectory = "uploads/";
+
+    $errors = []; // Store errors here
+
+    $fileName = $_FILES['uploadedFile']['name'];
+    $fileSize = $_FILES['uploadedFile']['size'];
+    $fileTmpName  = $_FILES['uploadedFile']['tmp_name'];
+    $fileType = $_FILES['uploadeFile']['type'];
+    $fileExtension = strtolower(end(explode('.',$fileName)));
+
+    $uploadPath = $uploadDirectory . basename($fileName); 
 if(isset($_POST['submit_button'])) {
 	require_once "config.php";
     if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
     }
+	//Upload stuff
+      if ($fileSize > 4000000) {
+        $errors[] = "File exceeds maximum size (4MB)";
+      }
+
+      if (empty($errors)) {
+        $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
+
+        if ($didUpload) {
+          echo "";
+        } else {
+          echo "";
+        }
+      } else {
+        foreach ($errors as $error) {
+          echo $error . "These are the errors" . "\n";
+        }
+      }
+
+	
+	//SQL stuff
 	$name = $_POST['name'];
 	$category = $_POST['category'];
 	$description = $_POST['description'];
@@ -122,7 +156,7 @@ if(isset($_POST['submit_button'])) {
 	$attempts = $_POST['attempts'];
 	$hint = $_POST['hint'];
 	$hintCost = $_POST['hintCost'];
-	$sql = "INSERT INTO challenge (name, category, description, flag, points, attempts, hint, hintCost ) VALUES ('$name', '$category', '$description', '$flag', '$points', '$attempts', '$hint', '$hintCost')";
+	$sql = "INSERT INTO challenge (name, category, description, flag, points, attempts, hint, hintCost, file ) VALUES ('$name', '$category', '$description', '$flag', '$points', '$attempts', '$hint', '$hintCost', '$uploadPath')";
 	if ($link->query($sql) === TRUE) {
     echo "";
 } else {
