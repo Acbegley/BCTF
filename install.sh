@@ -6,7 +6,6 @@ sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
 sudo mv *  /var/www/html/
 cd .. && sudo rm -r BCTF/
 cd /var/www/html
-mkdir uploads
 sudo service mysql restart
 echo '
 
