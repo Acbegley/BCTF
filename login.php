@@ -7,9 +7,12 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 require_once "config.php";
+
  
 $username = $password = "";
 $username_err = $password_err = "";
+
+$dn="uid=".$username.",".$ldapconfig['usersdn'].",".$ldapconfig['basedn'];
  
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
@@ -47,8 +50,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             header("location: welcome.php");
                         } else{
-                            $password_err = "The password you entered was not valid.";
-                        }
+							//if(isset($_POST['username'])){
+								if ($bind=ldap_bind($ds, $dn, $password)) {
+									$_SESSION["loggedin"] = true;
+									$_SESSION["id"] = $id;
+									$_SESSION["username"] = $username;									
+									$exists = "SELECT TRUE FROM users WHERE username = ? LIMIT 1";
+									$stmt = $pdo->prepare($exists);
+									$stmt->execute([$username]);
+									$exists = $stmt->fetch();
+
+									if (!$exists) {
+										$newUser = "INSERT INTO users (username, score, admin) VALUES ('$username', 0, false)";
+										mysqli_query($link, $newUser);
+									}
+									header("location: welcome.php");
+								} else {
+
+									$password_err = "The password you entered was not valid.";
+								}
+							}
+                        //}
                     }
                 } else{
                     $username_err = "No account found with that username.";
@@ -63,6 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     mysqli_close($link);
 }
+
 ?>
  
 <!DOCTYPE html>
