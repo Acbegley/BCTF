@@ -19,3 +19,4 @@ echo '
 sudo mysql -u root -p -e "create database ctf"
 sudo mysql -u root -p ctf < ctf.sql
 sudo service apache2 restart
+sudo chown -R www-data:www-data /var/www/html
