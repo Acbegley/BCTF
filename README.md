@@ -15,6 +15,10 @@ If not already executable, mark the install script as so
 
 `chmod +x install.sh`
 
+Make sure your machine is up to date
+
+`sudo apt-get update`
+
 Execute the scipt
 
 `./install.sh`
