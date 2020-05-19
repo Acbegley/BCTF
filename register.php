@@ -22,7 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     $username_err = "This username is already taken.";
                 } else{
-                    $username = trim($_POST["username"]);
+                    $username = strip_tags(trim($_POST["username"]));
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
